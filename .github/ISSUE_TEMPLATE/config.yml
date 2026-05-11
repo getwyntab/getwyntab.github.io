@@ -1,0 +1,7 @@
+contact_links:
+  - name: 🚀 WYNTab Discussions
+    url: https://github.com/getwyntab/wyntab/discussions
+    about: Ask questions and discuss features with the community.
+  - name: 📖 Documentation
+    url: https://getwyntab.github.io/docs/guides/getting-started
+    about: Guides, troubleshooting, and answers to common questions.

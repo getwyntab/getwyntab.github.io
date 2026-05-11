@@ -1,0 +1,62 @@
+name: Deploy
+
+on:
+    workflow_dispatch: {}
+    push:
+        branches:
+            - main
+        paths:
+          - 'src/**'
+          - 'package.json'
+          - 'bun.lock'
+          - '.github/workflows/deploy.yml'
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+env:
+    VITE_BASE: /
+    VITE_HOSTNAME: https://getwyntab.github.io
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        permissions:
+            contents: read
+            pages: write
+            id-token: write
+
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Bun
+              uses: oven-sh/setup-bun@v2
+              with:
+                bun-version: latest
+
+            - name: Install dependencies
+              run: bun install
+
+            - name: Build
+              run: bun run build
+
+            - name: Configure pages
+              uses: actions/configure-pages@v5
+
+            - name: Upload pages artifact
+              uses: actions/upload-pages-artifact@v4
+              with:
+                  path: dist
+
+            - name: Deploy
+              id: deployment
+              uses: actions/deploy-pages@v4
