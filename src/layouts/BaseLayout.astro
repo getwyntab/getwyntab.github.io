@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+}
+
+const {
+  title = 'WYNTab — Write Your NewTab | Custom HTML, CSS & React New Tab Extension',
+  description = 'Write your new tab in raw HTML, CSS, and React. Zero tracking, zero latency, isolated in an offline local sandbox.',
+  canonicalPath = '',
+  image = 'https://getwyntab.github.io/screenshots/marquee-promo-tile-1400x560.png',
+} = Astro.props;
+
+const canonicalUrl = new URL(canonicalPath, 'https://getwyntab.github.io').toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'WYNTab',
+  applicationCategory: 'BrowserApplication',
+  operatingSystem: 'All Chromium-based browsers (Chrome, Brave, Edge, Opera, Vivaldi)',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  description: 'Write Your NewTab — Replace the default new tab page with custom HTML, CSS, and React running in a secure, offline local sandbox.',
+  image: 'https://getwyntab.github.io/screenshots/marquee-promo-tile-1400x560.png',
+  url: 'https://getwyntab.github.io/',
+};
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0E0E0E" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="WYNTab" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="560" />
+    <meta property="og:image:alt" content="WYNTab — Write Your NewTab" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content="WYNTab — Write Your NewTab" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="bg-[#0E0E0E] text-neutral-200 antialiased selection:bg-[#10B981]/30 selection:text-[#34D399] min-h-screen flex flex-col">
+    <slot />
+  </body>
+</html>

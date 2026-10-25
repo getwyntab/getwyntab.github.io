@@ -1,11 +1,10 @@
 # Dependencies
 node_modules
 .cache
-dist
 
 # Build output
-src/.vitepress/cache
-src/.vitepress/dist
+.astro
+dist
 
 # Logs
 *.log

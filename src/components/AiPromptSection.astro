@@ -1,0 +1,115 @@
+---
+import { siteConfig } from '../config/site';
+import { Copy, Check, Sparkles } from 'lucide-astro';
+---
+
+<section id="ai-prompt" class="py-20 border-t border-[#1C1C1C] relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/25">
+        <Sparkles class="w-3.5 h-3.5" />
+        <span>AI-Powered Generation</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+        Generate complete new tabs with any AI model.
+      </h2>
+      <p class="text-neutral-400 text-base sm:text-lg">
+        Feed this system prompt to Claude, ChatGPT, Gemini, or DeepSeek along with your ideas. Paste the generated HTML into WYNTab and you're done.
+      </p>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="rounded-2xl border border-[#2E2E2E] bg-[#141414] shadow-2xl overflow-hidden">
+        <!-- Terminal / Card Header -->
+        <div class="flex items-center justify-between px-5 py-3 bg-[#181818] border-b border-[#2E2E2E]">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#333333]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#333333]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#333333]"></span>
+            <span class="text-xs font-mono text-neutral-400 ml-2">wyntab-system-prompt.txt</span>
+          </div>
+
+          <button
+            type="button"
+            id="copy-prompt-btn"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#10B981] hover:bg-[#34D399] text-[#022C22] transition-colors cursor-pointer"
+            aria-label="Copy AI System Prompt"
+          >
+            <Copy id="copy-icon" class="w-3.5 h-3.5" />
+            <Check id="check-icon" class="w-3.5 h-3.5 hidden" />
+            <span id="copy-text">Copy Prompt</span>
+          </button>
+        </div>
+
+        <!-- Prompt Text Area -->
+        <div class="p-6 bg-[#0E0E0E] overflow-x-auto max-h-[420px] overflow-y-auto">
+          <pre
+            id="ai-prompt-content"
+            class="font-mono text-xs sm:text-sm text-neutral-300 whitespace-pre-wrap leading-relaxed select-all"
+          >{siteConfig.aiPrompt}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  async function copyTextToClipboard(text: string): Promise<boolean> {
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        // Fallback to execCommand below
+      }
+    }
+
+    try {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.top = '-9999px';
+      textArea.style.left = '-9999px';
+      textArea.setAttribute('readonly', '');
+      document.body.appendChild(textArea);
+      textArea.select();
+      const success = document.execCommand('copy');
+      document.body.removeChild(textArea);
+      return success;
+    } catch {
+      return false;
+    }
+  }
+
+  function setupCopy() {
+    const copyBtn = document.getElementById('copy-prompt-btn');
+    const promptEl = document.getElementById('ai-prompt-content');
+    const copyIcon = document.getElementById('copy-icon');
+    const checkIcon = document.getElementById('check-icon');
+    const copyText = document.getElementById('copy-text');
+
+    if (!copyBtn || !promptEl || !copyIcon || !checkIcon || !copyText) return;
+    if (copyBtn.dataset.listenerAttached === 'true') return;
+    copyBtn.dataset.listenerAttached = 'true';
+
+    copyBtn.addEventListener('click', async () => {
+      const textToCopy = promptEl.textContent || '';
+      const copied = await copyTextToClipboard(textToCopy);
+
+      if (copied) {
+        copyIcon.classList.add('hidden');
+        checkIcon.classList.remove('hidden');
+        copyText.textContent = 'Copied!';
+
+        setTimeout(() => {
+          checkIcon.classList.add('hidden');
+          copyIcon.classList.remove('hidden');
+          copyText.textContent = 'Copy Prompt';
+        }, 2000);
+      }
+    });
+  }
+
+  setupCopy();
+  document.addEventListener('astro:page-load', setupCopy);
+</script>

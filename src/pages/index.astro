@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import TemplateGallery from '../components/TemplateGallery.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import AiPromptSection from '../components/AiPromptSection.astro';
+import CompatibilityCta from '../components/CompatibilityCta.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout canonicalPath="/">
+  <Navbar />
+  <main class="flex-1">
+    <Hero />
+    <TemplateGallery />
+    <FeatureGrid />
+    <AiPromptSection />
+    <CompatibilityCta />
+  </main>
+  <Footer />
+</BaseLayout>

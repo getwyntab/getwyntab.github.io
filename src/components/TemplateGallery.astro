@@ -1,0 +1,189 @@
+---
+import { siteConfig } from '../config/site';
+---
+
+<section id="templates" class="py-20 border-t border-[#1C1C1C] relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/25">
+        Live Presets
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+        Instant presets or completely blank canvas.
+      </h2>
+      <p class="text-neutral-400 text-base sm:text-lg">
+        Pick a pre-configured template running at 60 FPS, fork it in the editor, or write your own from scratch.
+      </p>
+    </div>
+
+    <!-- Template Switcher Container -->
+    <div class="max-w-5xl mx-auto space-y-6">
+      <!-- Tab Buttons -->
+      <div
+        role="tablist"
+        aria-label="WYNTab Templates"
+        class="flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-[#141414] border border-[#2E2E2E]"
+      >
+        {siteConfig.templates.map((tmpl, idx) => (
+          <button
+            type="button"
+            role="tab"
+            id={`tab-${tmpl.id}`}
+            aria-selected={idx === 0 ? "true" : "false"}
+            aria-controls={`panel-${tmpl.id}`}
+            tabindex={idx === 0 ? 0 : -1}
+            data-template-id={tmpl.id}
+            class={`template-tab-btn px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer flex items-center gap-2 ${
+              idx === 0
+                ? "bg-[#10B981] text-[#022C22] font-semibold shadow-md shadow-[#10B981]/20"
+                : "text-neutral-400 hover:text-white hover:bg-[#1E1E1E]"
+            }`}
+          >
+            <span>{tmpl.name}</span>
+          </button>
+        ))}
+      </div>
+
+      <!-- Active Tagline Display -->
+      <div class="text-center min-h-[1.75rem]">
+        {siteConfig.templates.map((tmpl, idx) => (
+          <p
+            id={`tagline-${tmpl.id}`}
+            class={`template-tagline text-sm text-neutral-400 font-mono transition-opacity ${
+              idx === 0 ? "block" : "hidden"
+            }`}
+          >
+            {tmpl.tagline}
+          </p>
+        ))}
+      </div>
+
+      <!-- Preview Stage (strict 16/10 aspect ratio) -->
+      <div class="rounded-2xl border border-[#2E2E2E] bg-[#141414] overflow-hidden shadow-2xl relative">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-[#181818] border-b border-[#2E2E2E] text-xs font-mono text-neutral-400">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#333333]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#333333]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#333333]"></span>
+          </div>
+          <span id="active-filename" class="text-neutral-300">preset-atmosphere.html</span>
+          <div class="w-12"></div>
+        </div>
+
+        <div class="aspect-[16/10] w-full bg-[#0E0E0E] relative overflow-hidden">
+          {siteConfig.templates.map((tmpl, idx) => (
+            <div
+              id={`panel-${tmpl.id}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${tmpl.id}`}
+              class={`template-panel absolute inset-0 w-full h-full transition-opacity duration-200 ${
+                idx === 0 ? "opacity-100 z-10" : "opacity-0 pointer-events-none z-0"
+              }`}
+            >
+              <img
+                src={tmpl.image}
+                alt={tmpl.alt}
+                class="w-full h-full object-cover"
+                loading={idx === 0 ? "eager" : "lazy"}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupGallery() {
+    const tablist = document.querySelector<HTMLElement>('[role="tablist"]');
+    if (!tablist) return;
+    if (tablist.dataset.initialized === 'true') return;
+    tablist.dataset.initialized = 'true';
+
+    const tabBtns = Array.from(tablist.querySelectorAll<HTMLButtonElement>('.template-tab-btn'));
+    const panels = document.querySelectorAll<HTMLElement>('.template-panel');
+    const taglines = document.querySelectorAll<HTMLElement>('.template-tagline');
+    const filenameEl = document.getElementById('active-filename');
+
+    const fileMap: Record<string, string> = {
+      atmosphere: 'preset-atmosphere.html',
+      terminal: 'preset-terminal.html',
+      links: 'preset-links.html',
+      editor: 'editor-split-preview.html',
+      dashboard: 'workspace-manager.html',
+    };
+
+    function activateTab(targetBtn: HTMLButtonElement) {
+      const targetId = targetBtn.getAttribute('data-template-id');
+      if (!targetId) return;
+
+      tabBtns.forEach((b) => {
+        const isSelected = b === targetBtn;
+        b.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+        b.setAttribute('tabindex', isSelected ? '0' : '-1');
+        b.className = isSelected
+          ? 'template-tab-btn px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer flex items-center gap-2 bg-[#10B981] text-[#022C22] font-semibold shadow-md shadow-[#10B981]/20'
+          : 'template-tab-btn px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer flex items-center gap-2 text-neutral-400 hover:text-white hover:bg-[#1E1E1E]';
+      });
+
+      panels.forEach((p) => {
+        if (p.id === `panel-${targetId}`) {
+          p.classList.remove('opacity-0', 'pointer-events-none', 'z-0');
+          p.classList.add('opacity-100', 'z-10');
+        } else {
+          p.classList.remove('opacity-100', 'z-10');
+          p.classList.add('opacity-0', 'pointer-events-none', 'z-0');
+        }
+      });
+
+      taglines.forEach((t) => {
+        if (t.id === `tagline-${targetId}`) {
+          t.classList.remove('hidden');
+          t.classList.add('block');
+        } else {
+          t.classList.remove('block');
+          t.classList.add('hidden');
+        }
+      });
+
+      if (filenameEl && fileMap[targetId]) {
+        filenameEl.textContent = fileMap[targetId];
+      }
+    }
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activateTab(btn);
+      });
+    });
+
+    // WAI-ARIA keyboard navigation for tablist
+    tablist.addEventListener('keydown', (e: KeyboardEvent) => {
+      const activeIdx = tabBtns.findIndex((b) => b.getAttribute('aria-selected') === 'true');
+      if (activeIdx === -1) return;
+
+      let nextIdx = -1;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        nextIdx = (activeIdx + 1) % tabBtns.length;
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        nextIdx = (activeIdx - 1 + tabBtns.length) % tabBtns.length;
+      } else if (e.key === 'Home') {
+        nextIdx = 0;
+      } else if (e.key === 'End') {
+        nextIdx = tabBtns.length - 1;
+      }
+
+      if (nextIdx !== -1) {
+        e.preventDefault();
+        const targetBtn = tabBtns[nextIdx];
+        activateTab(targetBtn);
+        targetBtn.focus();
+      }
+    });
+  }
+
+  // Setup on initial load and page swaps
+  setupGallery();
+  document.addEventListener('astro:page-load', setupGallery);
+</script>

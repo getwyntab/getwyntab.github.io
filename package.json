@@ -1,10 +1,9 @@
 {
   "name": "wyntab-website",
   "type": "module",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "private": true,
-  "packageManager": "bun@1.3.11",
-  "description": "Official website for WYNTab browser extension.",
+  "description": "Official promotional website for WYNTab browser extension.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -13,77 +12,17 @@
   "bugs": {
     "url": "https://github.com/getwyntab/getwyntab.github.io/issues"
   },
-  "engines": {
-    "node": ">=22",
-    "bun": ">=1.1"
-  },
   "scripts": {
-    "test": "bun lint && bun build",
-    "dev": "vitepress dev src",
-    "build": "vitepress build src",
-    "preview": "vitepress preview src",
-    "lint": "bun lint:es && bun lint:mdl && bun lint:style",
-    "lint:fix": "bun lint:es:fix && bun lint:style:fix",
-    "lint:es": "eslint . ",
-    "lint:es:fix": "eslint . --fix",
-    "lint:mdl": "markdownlint \"**/*.md\" \".github/**/*.md\" --enable sentences-per-line --disable MD025 MD033",
-    "lint:style": "cross-env NODE_OPTIONS='--no-deprecation' stylelint '**/*.{styl,vue}' 'src/.vitepress/**/*.{styl,vue}'",
-    "lint:style:fix": "cross-env NODE_OPTIONS='--no-deprecation' stylelint --fix '**/*.{styl,vue}' 'src/.vitepress/**/*.{styl,vue}'"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "sync": "bun scripts/sync-assets.mjs",
+    "test": "bun test"
   },
   "dependencies": {
-    "@iconify-prerendered/vue-mdi": "0.28.1737398331",
-    "@octokit/rest": "22.0.1",
-    "@octokit/types": "16.0.0",
-    "@tanstack/vue-query": "5.90.7",
-    "@vueuse/core": "14.0.0",
-    "axios": "1.15.0",
-    "element-plus": "2.11.7",
-    "lodash.groupby": "4.6.0",
-    "markdown-it": "14.1.1",
-    "markdown-it-shortcode-tag": "1.1.0",
-    "moment": "2.30.1"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config": "^6.2.0",
-    "@eslint/eslintrc": "^3.3.1",
-    "@mdit/plugin-attrs": "0.23.3",
-    "@mdit/plugin-figure": "0.22.2",
-    "@mdit/plugin-img-lazyload": "0.22.1",
-    "@mdit/plugin-img-mark": "0.22.2",
-    "@mdit/plugin-img-size": "0.22.3",
-    "@mdit/plugin-include": "0.22.2",
-    "@resvg/resvg-js": "2.6.2",
-    "@types/gtag.js": "0.0.20",
-    "@types/lodash.groupby": "4.6.9",
-    "@types/markdown-it": "14.1.2",
-    "@types/node": "24.10.0",
-    "@typescript-eslint/eslint-plugin": "8.46.3",
-    "@typescript-eslint/parser": "8.46.3",
-    "cross-env": "^10.1.0",
-    "eslint": "9.39.1",
-    "eslint-config-standard": "17.1.0",
-    "eslint-plugin-vue": "10.5.1",
-    "feed": "5.1.0",
-    "lint-staged": "16.2.6",
-    "markdownlint": "0.39.0",
-    "markdownlint-cli": "0.45.0",
-    "sentences-per-line": "0.3.0",
-    "stylelint": "16.25.0",
-    "stylelint-stylus": "1.0.0",
-    "stylus": "0.64.0",
-    "unplugin-element-plus": "0.11.1",
-    "vite-plugin-eslint": "1.8.1",
-    "vitepress": "1.6.4",
-    "vitepress-plugin-tabs": "0.7.3",
-    "vue": "3.5.24",
-    "vue-eslint-parser": "10.2.0",
-    "x-satori": "0.4.0"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
-  },
-  "lint-staged": {
-    "*.{styl,vue}": "stylelint --fix",
-    "*.{html,json}": "prettier --write"
+    "@tailwindcss/vite": "^4.0.0",
+    "astro": "^5.0.0",
+    "lucide-astro": "^0.556.0",
+    "tailwindcss": "^4.0.0"
   }
 }

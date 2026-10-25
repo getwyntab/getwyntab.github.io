@@ -1,0 +1,57 @@
+---
+import { siteConfig } from '../config/site';
+import { Github, ArrowUpRight } from 'lucide-astro';
+---
+
+<header class="sticky top-0 z-50 w-full backdrop-blur-md bg-[#0E0E0E]/85 border-b border-[#2E2E2E] transition-all">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <!-- Brand -->
+    <a href="/" class="flex items-center gap-3 group">
+      <img
+        src="/favicon.png"
+        alt="WYNTab Icon"
+        class="w-8 h-8 rounded-lg shadow-sm group-hover:scale-105 transition-transform"
+      />
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-lg tracking-tight text-white group-hover:text-[#10B981] transition-colors">
+          {siteConfig.name}
+        </span>
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-mono font-medium bg-[#10B981]/15 text-[#10B981] border border-[#10B981]/30">
+          v{siteConfig.version}
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-400">
+      <a href="/#templates" class="hover:text-white transition-colors">Templates</a>
+      <a href="/#features" class="hover:text-white transition-colors">Features</a>
+      <a href="/#ai-prompt" class="hover:text-white transition-colors">AI Prompt</a>
+      <a href="/privacy/" class="hover:text-white transition-colors">Privacy</a>
+    </nav>
+
+    <!-- Right Actions -->
+    <div class="flex items-center gap-3">
+      <a
+        href={siteConfig.githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-white bg-[#181818] hover:bg-[#222222] border border-[#2E2E2E] transition-colors"
+        aria-label="View source code on GitHub"
+      >
+        <Github class="w-4 h-4" />
+        <span class="hidden sm:inline font-mono text-xs">GitHub</span>
+      </a>
+
+      <a
+        href={siteConfig.cwsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold bg-[#10B981] hover:bg-[#34D399] text-[#022C22] shadow-sm shadow-[#10B981]/25 transition-all hover:shadow-[#10B981]/40"
+      >
+        <span>Add to Chrome</span>
+        <ArrowUpRight class="w-4 h-4" />
+      </a>
+    </div>
+  </div>
+</header>

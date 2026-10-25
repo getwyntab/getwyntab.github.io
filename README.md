@@ -1,36 +1,37 @@
-<div align="center">
-    <img src=".github/assets/logo.png" width="128" height="128" alt="WYNTab Logo">
-    <h1>WYNTab</h1>
-    <p>Write Your NewTab - Fully customize your New Tab page with custom HTML templates.</p>
-</div>
+# getwyntab.github.io
 
-<p align="center">
-    <a href="https://github.com/getwyntab/wyntab/releases">
-        <img src="https://img.shields.io/github/downloads/getwyntab/wyntab/total?label=downloads&labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat" alt="GitHub downloads">
-    </a>
-    <a href="https://github.com/getwyntab/wyntab/stargazers">
-        <img src="https://img.shields.io/github/stars/getwyntab/wyntab?labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat" alt="GitHub stars">
-    </a>
-    <a href="https://github.com/getwyntab/wyntab/issues">
-        <img src="https://img.shields.io/github/issues/getwyntab/wyntab?labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat" alt="GitHub issues">
-    </a>
-</p>
+Official promotional website for the **WYNTab** browser extension ([getwyntab.github.io](https://getwyntab.github.io)).
 
----
+Built with **Astro 5** and **Tailwind CSS v4**, structured around `/brag` narrative flow (*Hook &rarr; Reveal &rarr; Core User Flow &rarr; Sharp Highlights &rarr; Outro CTA*).
 
-WYNTab is a browser extension that allows you to replace the default new tab page with your own custom HTML templates.
+## Development
 
-### Features
+Prerequisites:
+- [Bun](https://bun.sh/) (>= 1.1)
 
-- **Custom HTML Templates**: Use your own HTML/CSS to build your perfect new tab page.
-- **Privacy First**: All data is stored locally. No external tracking.
-- **Backups**: Easily export and import your templates.
-- **Open Source**: Licensed under Apache-2.0.
+```bash
+# Install dependencies
+bun install
 
-### Contributing
+# Sync assets from sibling wyntab repo (.output/cws-assets & .output/brag-output)
+bun run sync
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+# Start development server
+bun run dev
 
-### License
+# Build production static site
+bun run build
 
-WYNTab is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for more information.
+# Preview production build
+bun run preview
+```
+
+## Architecture
+
+- Static single-page application built directly into `dist/`.
+- Zero-runtime overhead; strictly static pre-rendered assets.
+- Deployed automatically to GitHub Pages on pushes to `main`.
+
+## License
+
+Licensed under the [Apache-2.0 License](LICENSE).

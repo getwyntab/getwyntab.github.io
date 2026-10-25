@@ -1,0 +1,58 @@
+---
+import { siteConfig } from '../config/site';
+import {
+  Code2,
+  Boxes,
+  ShieldCheck,
+  HardDrive,
+  Zap,
+  EyeOff,
+} from 'lucide-astro';
+
+const iconMap = {
+  Code2,
+  Boxes,
+  ShieldCheck,
+  HardDrive,
+  Zap,
+  EyeOff,
+};
+---
+
+<section id="features" class="py-20 border-t border-[#1C1C1C] relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/25">
+        Architecture & Speed
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+        Engineered for speed, isolation, and full control.
+      </h2>
+      <p class="text-neutral-400 text-base sm:text-lg">
+        Designed from first principles to comply with strict Manifest V3 security while running custom runtime scripts with zero compromises.
+      </p>
+    </div>
+
+    <!-- 3x2 Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      {siteConfig.features.map((feat) => {
+        const IconComponent = iconMap[feat.icon as keyof typeof iconMap] || Code2;
+        return (
+          <div class="group relative rounded-2xl bg-[#181818] border border-[#2E2E2E] p-6 hover:border-[#10B981]/50 transition-all duration-200 hover:-translate-y-0.5">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-11 h-11 rounded-xl bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center text-[#10B981] group-hover:scale-110 transition-transform">
+                <IconComponent class="w-5 h-5" />
+              </div>
+              <h3 class="font-bold text-lg text-white group-hover:text-[#10B981] transition-colors">
+                {feat.title}
+              </h3>
+            </div>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              {feat.description}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

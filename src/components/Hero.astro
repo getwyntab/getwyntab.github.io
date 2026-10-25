@@ -1,0 +1,128 @@
+---
+import { siteConfig } from '../config/site';
+import { ArrowRight, Github, ShieldCheck, Zap, Lock } from 'lucide-astro';
+---
+
+<section class="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
+  <!-- Subtle ambient glow background -->
+  <div class="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#10B981]/10 blur-[130px] rounded-full"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="max-w-3xl mx-auto text-center space-y-6">
+      <!-- Status Badge -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-[#181818] border border-[#2E2E2E] text-neutral-300">
+        <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+        <span>WYNTab v{siteConfig.version} for Chromium</span>
+      </div>
+
+      <!-- Hook Headline -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
+        Your new tab shouldn't be an <span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 via-neutral-400 to-neutral-500">ad billboard</span>.
+      </h1>
+
+      <!-- Sub-headline -->
+      <p class="text-lg sm:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+        Write your new tab in raw <span class="text-white font-medium">HTML</span>, <span class="text-white font-medium">CSS</span>, and <span class="text-white font-medium">React</span>. Zero tracking, zero latency, isolated in an offline local sandbox.
+      </p>
+
+      <!-- Trust Badges -->
+      <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-neutral-400 pt-1">
+        <div class="flex items-center gap-1.5 bg-[#141414] px-2.5 py-1 rounded-md border border-[#2E2E2E]">
+          <ShieldCheck class="w-3.5 h-3.5 text-[#10B981]" />
+          <span>Manifest V3 Sandboxed</span>
+        </div>
+        <div class="flex items-center gap-1.5 bg-[#141414] px-2.5 py-1 rounded-md border border-[#2E2E2E]">
+          <Zap class="w-3.5 h-3.5 text-[#10B981]" />
+          <span>Zero-Flash Pre-render</span>
+        </div>
+        <div class="flex items-center gap-1.5 bg-[#141414] px-2.5 py-1 rounded-md border border-[#2E2E2E]">
+          <Lock class="w-3.5 h-3.5 text-[#10B981]" />
+          <span>100% Offline & Open Source</span>
+        </div>
+      </div>
+
+      <!-- CTA Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3">
+        <a
+          href={siteConfig.cwsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-base bg-[#10B981] hover:bg-[#34D399] text-[#022C22] shadow-lg shadow-[#10B981]/25 hover:shadow-[#10B981]/40 transition-all cursor-pointer"
+        >
+          <span>Add to Chrome — Free</span>
+          <ArrowRight class="w-4 h-4" />
+        </a>
+
+        <a
+          href={siteConfig.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-base text-neutral-300 hover:text-white bg-[#181818] hover:bg-[#222222] border border-[#2E2E2E] transition-all"
+        >
+          <Github class="w-4 h-4" />
+          <span>View on GitHub</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero Showcase Frame -->
+    <div class="mt-12 md:mt-16 max-w-5xl mx-auto">
+      <div class="relative rounded-2xl border border-[#2E2E2E] bg-[#141414] shadow-2xl overflow-hidden ring-1 ring-white/10">
+        <!-- Mock Window Titlebar -->
+        <div class="flex items-center justify-between px-4 py-3 bg-[#181818] border-b border-[#2E2E2E]">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-[#333333]"></div>
+            <div class="w-3 h-3 rounded-full bg-[#333333]"></div>
+            <div class="w-3 h-3 rounded-full bg-[#333333]"></div>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#101010] border border-[#262626] text-xs font-mono text-neutral-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+            <span>wyntab://newtab</span>
+          </div>
+          <div class="w-12"></div>
+        </div>
+
+        <!-- Strict aspect ratio container preventing CLS -->
+        <div class="aspect-[16/10] w-full bg-[#0E0E0E] relative flex items-center justify-center overflow-hidden">
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="/media/brag.jpg"
+            class="w-full h-full object-cover cursor-pointer"
+          >
+            <source src="/media/brag.mp4" type="video/mp4" />
+            <!-- Fallback image -->
+            <img
+              src="/screenshots/screenshot-2-editor.png"
+              alt="WYNTab In-Browser Code Editor Live Preview"
+              class="w-full h-full object-cover"
+              loading="eager"
+            />
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupHeroVideo() {
+    const video = document.querySelector<HTMLVideoElement>('video');
+    if (!video || video.dataset.initialized === 'true') return;
+    video.dataset.initialized = 'true';
+
+    video.addEventListener('click', () => {
+      if (video.paused) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }
+
+  setupHeroVideo();
+  document.addEventListener('astro:page-load', setupHeroVideo);
+</script>
