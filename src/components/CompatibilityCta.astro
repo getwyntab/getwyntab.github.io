@@ -1,6 +1,6 @@
 ---
 import { siteConfig } from '../config/site';
-import { ArrowRight, Github, CheckCircle2 } from 'lucide-astro';
+import { ArrowRight, CheckCircle2 } from 'lucide-astro';
 
 const browsers = [
   'Google Chrome',
@@ -35,26 +35,16 @@ const browsers = [
       ))}
     </div>
 
-    <!-- CTA Buttons -->
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+    <!-- Primary Conversion CTA: Solo High-Intent Install Button -->
+    <div class="flex items-center justify-center pt-4">
       <a
         href={siteConfig.cwsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-bold text-base bg-[#10B981] hover:bg-[#34D399] text-[#022C22] shadow-xl shadow-[#10B981]/25 hover:shadow-[#10B981]/40 transition-all cursor-pointer"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl font-bold text-base bg-[#10B981] hover:bg-[#34D399] text-[#022C22] shadow-xl shadow-[#10B981]/25 hover:shadow-[#10B981]/40 transition-all cursor-pointer"
       >
-        <span>Install from Chrome Web Store</span>
+        <span>Add to Chrome — Free & Open Source</span>
         <ArrowRight class="w-5 h-5" />
-      </a>
-
-      <a
-        href={siteConfig.githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-medium text-base text-neutral-300 hover:text-white bg-[#181818] hover:bg-[#222222] border border-[#2E2E2E] transition-all"
-      >
-        <Github class="w-5 h-5" />
-        <span>View Source on GitHub</span>
       </a>
     </div>
 

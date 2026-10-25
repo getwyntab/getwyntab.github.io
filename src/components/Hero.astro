@@ -1,6 +1,6 @@
 ---
 import { siteConfig } from '../config/site';
-import { ArrowRight, Github, ShieldCheck, Zap, Lock } from 'lucide-astro';
+import { ArrowRight, ChevronDown, ShieldCheck, Zap, Lock } from 'lucide-astro';
 ---
 
 <section class="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
@@ -54,13 +54,11 @@ import { ArrowRight, Github, ShieldCheck, Zap, Lock } from 'lucide-astro';
         </a>
 
         <a
-          href={siteConfig.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#templates"
           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-base text-neutral-300 hover:text-white bg-[#181818] hover:bg-[#222222] border border-[#2E2E2E] transition-all"
         >
-          <Github class="w-4 h-4" />
-          <span>View on GitHub</span>
+          <span>Explore Presets</span>
+          <ChevronDown class="w-4 h-4 text-neutral-400" />
         </a>
       </div>
     </div>
