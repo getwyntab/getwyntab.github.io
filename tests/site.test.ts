@@ -10,6 +10,7 @@ const distDir = path.join(rootDir, 'dist');
 describe('Site Configuration (src/config/site.ts)', () => {
   test('version is a valid semver string', () => {
     expect(siteConfig.version).toMatch(/^\d+\.\d+\.\d+/);
+    expect(siteConfig.siteVersion).toBe('0.0.1');
   });
 
   test('contains 5 verified template showcases', () => {
@@ -107,8 +108,10 @@ describe('Static Build Output (dist/)', () => {
     expect(fs.existsSync(indexPath)).toBe(true);
     const html = fs.readFileSync(indexPath, 'utf8');
 
-    // Canonical link
+    // Canonical link & site version meta
     expect(html).toContain('<link rel="canonical" href="https://getwyntab.github.io/">');
+    expect(html).toContain('<meta name="site-version" content="0.0.1">');
+    expect(html).toContain('Site v0.0.1');
 
     // OpenGraph & Twitter
     expect(html).toContain('property="og:title"');

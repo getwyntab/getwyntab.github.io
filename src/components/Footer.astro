@@ -13,8 +13,10 @@ import { Github, ArrowUpRight } from 'lucide-astro';
           <span class="font-bold text-white tracking-tight">{siteConfig.name}</span>
           <span class="text-xs font-mono text-neutral-500">v{siteConfig.version}</span>
         </div>
-        <p class="text-xs text-neutral-500">
-          Write Your NewTab — Released under the <a href="https://github.com/getwyntab/wyntab/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-300 underline underline-offset-2">Apache-2.0 License</a>.
+        <p class="text-xs text-neutral-500 flex flex-wrap items-center gap-1.5">
+          <span>Write Your NewTab — Released under the <a href="https://github.com/getwyntab/wyntab/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-300 underline underline-offset-2">Apache-2.0 License</a>.</span>
+          <span class="text-neutral-700 hidden sm:inline" aria-hidden="true">•</span>
+          <span class="text-[11px] font-mono text-neutral-600">Site v{siteConfig.siteVersion}</span>
         </p>
       </div>
 

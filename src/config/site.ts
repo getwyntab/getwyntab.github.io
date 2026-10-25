@@ -17,6 +17,7 @@ export const siteConfig = {
   name: 'WYNTab',
   tagline: 'Write Your NewTab',
   version: '0.6.0',
+  siteVersion: '0.0.1',
   cwsUrl: 'https://chromewebstore.google.com/detail/wyntab/hbfabaimiglbfjhcppfedgjkpfgabiff',
   githubUrl: 'https://github.com/getwyntab/wyntab',
   siteUrl: 'https://getwyntab.github.io',

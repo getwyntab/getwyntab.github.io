@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { siteConfig } from '../config/site';
 
 interface Props {
   title?: string;
@@ -46,6 +47,7 @@ const jsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0E0E0E" />
+    <meta name="site-version" content={siteConfig.siteVersion} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:site_name" content="WYNTab" />
