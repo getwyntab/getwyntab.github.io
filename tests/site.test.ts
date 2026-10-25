@@ -125,12 +125,13 @@ describe('Static Build Output (dist/)', () => {
     expect(jsonLd.applicationCategory).toBe('BrowserApplication');
     expect(jsonLd.offers.price).toBe('0');
 
-    // Video hero frame
+    // Video hero frame (16:9 aspect ratio matching 1080p brag.mp4)
     expect(html).toContain('src="/media/brag.mp4"');
     expect(html).toContain('poster="/media/brag.jpg"');
-    expect(html).toContain('aspect-[16/10]');
+    expect(html).toContain('aspect-video');
 
-    // Template gallery tabs and panels
+    // Template gallery tabs and panels (16:10 aspect ratio matching 1280x800 CWS screenshots)
+    expect(html).toContain('aspect-[16/10]');
     for (const tmpl of siteConfig.templates) {
       expect(html).toContain(`id="tab-${tmpl.id}"`);
       expect(html).toContain(`id="panel-${tmpl.id}"`);
@@ -145,6 +146,7 @@ describe('Static Build Output (dist/)', () => {
     // AI Prompt Copy
     expect(html).toContain('id="copy-prompt-btn"');
     expect(html).toContain('id="ai-prompt-content"');
+    expect(html).toContain('terminal-scrollbar');
 
     // Browser compatibility
     expect(html).toContain('Google Chrome');
@@ -188,7 +190,7 @@ describe('Static Build Output (dist/)', () => {
     expect(html).toContain('id="tab-dashboard" aria-selected="false" aria-controls="panel-dashboard" tabindex="-1"');
 
     // Video has cursor-pointer class and playsinline
-    expect(html).toContain('class="w-full h-full object-cover cursor-pointer"');
+    expect(html).toContain('class="w-full h-full object-contain cursor-pointer"');
     expect(html).toContain('playsinline');
 
     // Social image alt tags

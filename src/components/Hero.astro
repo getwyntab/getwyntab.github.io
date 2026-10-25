@@ -82,8 +82,8 @@ import { ArrowRight, Github, ShieldCheck, Zap, Lock } from 'lucide-astro';
           <div class="w-12"></div>
         </div>
 
-        <!-- Strict aspect ratio container preventing CLS -->
-        <div class="aspect-[16/10] w-full bg-[#0E0E0E] relative flex items-center justify-center overflow-hidden">
+        <!-- Strict 16:9 aspect ratio container matching 1080p brag video without clipping -->
+        <div class="aspect-video w-full bg-[#0E0E0E] relative flex items-center justify-center overflow-hidden">
           <video
             autoplay
             muted
@@ -91,14 +91,14 @@ import { ArrowRight, Github, ShieldCheck, Zap, Lock } from 'lucide-astro';
             playsinline
             preload="metadata"
             poster="/media/brag.jpg"
-            class="w-full h-full object-cover cursor-pointer"
+            class="w-full h-full object-contain cursor-pointer"
           >
             <source src="/media/brag.mp4" type="video/mp4" />
             <!-- Fallback image -->
             <img
               src="/screenshots/screenshot-2-editor.png"
               alt="WYNTab In-Browser Code Editor Live Preview"
-              class="w-full h-full object-cover"
+              class="w-full h-full object-contain"
               loading="eager"
             />
           </video>
