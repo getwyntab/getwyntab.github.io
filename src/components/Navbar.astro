@@ -30,24 +30,26 @@ import { Github, ArrowUpRight } from 'lucide-astro';
       <a href="/privacy/" class="hover:text-white transition-colors">Privacy</a>
     </nav>
 
-    <!-- Right Actions -->
-    <div class="flex items-center gap-3">
+    <!-- Right Actions: Ghost Icon + Divider + Solo CTA -->
+    <div class="flex items-center gap-2 sm:gap-3">
       <a
         href={siteConfig.githubUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-white bg-[#181818] hover:bg-[#222222] border border-[#2E2E2E] transition-colors"
+        class="p-2 rounded-lg text-neutral-400 hover:text-white hover:bg-[#181818] transition-colors"
         aria-label="View source code on GitHub"
+        title="View source code on GitHub"
       >
-        <Github class="w-4 h-4" />
-        <span class="hidden sm:inline font-mono text-xs">GitHub</span>
+        <Github class="w-5 h-5" />
       </a>
+
+      <div class="h-4 w-px bg-[#2E2E2E]" aria-hidden="true"></div>
 
       <a
         href={siteConfig.cwsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold bg-[#10B981] hover:bg-[#34D399] text-[#022C22] shadow-sm shadow-[#10B981]/25 transition-all hover:shadow-[#10B981]/40"
+        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold bg-[#10B981] hover:bg-[#34D399] text-[#022C22] shadow-sm shadow-[#10B981]/25 transition-all hover:shadow-[#10B981]/40"
       >
         <span>Add to Chrome</span>
         <ArrowUpRight class="w-4 h-4" />
